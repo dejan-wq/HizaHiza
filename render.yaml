@@ -1,0 +1,14 @@
+# Free test deployment on Render: New > Blueprint > pick this repository.
+# Free plan: sleeps after 15 min idle (wakes in about a minute) and forgets reservations when it restarts. Fine for testing.
+services:
+  - type: web
+    name: hiza-hiza
+    runtime: node
+    plan: free
+    buildCommand: "true"
+    startCommand: node app.mjs
+    envVars:
+      - { key: DATA_FILE, value: /tmp/pms.json }
+      - { key: TEST_MODE, value: "1" }
+      - { key: PMS_TOKEN, generateValue: true }
+      - { key: PUBLIC_URL, sync: false }
